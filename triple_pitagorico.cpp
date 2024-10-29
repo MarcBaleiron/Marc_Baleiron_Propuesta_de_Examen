@@ -3,21 +3,25 @@
 #include <cmath>
 using namespace std;
 
-void triple_pitagorico::triple_pt (int valor_maximo)
-{
-    int a, b, c;
+pitagoricos::pitagoricos (int limite) : limite (limite) {}
 
-    for (a = 1; a <= valor_maximo; a++)
+void pitagoricos::triples_pt ()
+{
+    for (int a = 1; a <= limite; a++)
     {
-        for (b = 1; b <= valor_maximo; b++)
+        for (int b = a; b <= limite; b++)
         {
-            c = sqrt(a^2 + b^2);
+            int c = sqrt(a * a + b * b);
+
+            if (c * c == a * a + b * b && es_triple (a, b, c))
             {
-                if ((a^2 + b^2 == c^2) && (a + b > c) && (a + c > b) && (b + c > a))
-                {
-                    cout << "Triple pitagorico: " << a << " - " << b << " - " << c << endl;
-                }
+                cout << "Triple pitagorico:  " << a << " - " << b << " - " << c << endl;
             }
         }
     }
+}
+
+bool pitagoricos::es_triple (int a, int b, int c)
+{
+    return (a + b > c) && (a + c > b) && (b + c > a);
 }
